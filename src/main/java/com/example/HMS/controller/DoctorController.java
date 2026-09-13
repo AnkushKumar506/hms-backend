@@ -30,11 +30,13 @@ public class DoctorController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Doctor createDoctor(@RequestBody Doctor doctor) {
         return doctorService.createDoctor(doctor);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
         try {
