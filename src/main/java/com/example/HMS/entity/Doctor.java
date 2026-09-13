@@ -19,4 +19,7 @@ public class Doctor {
     private String contact;
 
     private String availability; // e.g. "Mon-Fri, 9AM-5PM"
+
+    @Column(unique = true)
+    private String username; // links this doctor profile to their login account
 }
