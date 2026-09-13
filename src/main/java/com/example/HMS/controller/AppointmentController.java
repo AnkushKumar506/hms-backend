@@ -3,6 +3,7 @@ package com.example.HMS.controller;
 import com.example.HMS.entity.Appointment;
 import com.example.HMS.service.AppointmentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class AppointmentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Appointment createAppointment(@RequestBody Appointment appointment) {
         return appointmentService.createAppointment(appointment);
@@ -43,6 +45,7 @@ public class AppointmentController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointment(id);
